@@ -58,7 +58,7 @@
 
 	scb {
 
-/* The button GPIO conflicts with OSPI0_D4 for this
+		/* The button GPIO conflicts with OSPI0_D4 for this
 		button0: button@0 {
 			compatible = "adi,button-led";
 			button_gpio = <48>; /* PD_00
