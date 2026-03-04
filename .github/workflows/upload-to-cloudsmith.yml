@@ -6,6 +6,10 @@ on:
       artifacts:
         required: true
         type: string
+      cloudsmith-repository:
+        required: false
+        default: ${{ vars.CLOUDSMITH_REPOSITORY }}
+        type: string
     secrets:
       CLOUDSMITH_SERVICE_SLUG:
         required: false
@@ -143,13 +147,13 @@ jobs:
           package_file=$(
             cs-package-upload ${{ env.CLOUDSMITH_API_KEY }} \
                               ${{ vars.CLOUDSMITH_NAMESPACE }} \
-                              ${{ vars.CLOUDSMITH_REPOSITORY }} \
+                              ${{ inputs.cloudsmith-repository }} \
                               "$file"
           )
 
           cs-package-store-raw ${{ env.CLOUDSMITH_API_KEY }} \
                                ${{ vars.CLOUDSMITH_NAMESPACE }} \
-                               ${{ vars.CLOUDSMITH_REPOSITORY }} \
+                               ${{ inputs.cloudsmith-repository }} \
                                $package_file \
                                $file \
                                "$tags_" \
